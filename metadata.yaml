@@ -1,0 +1,5 @@
+homepage: "https://toriidata.com"
+documentation: "https://github.com/EdgeDigital/torii-gtm-template#readme"
+versions:
+  - sha: fd1a65b456a32abfb69e3002413fbd3ec007e84f
+    changeNotes: Initial Torii Pixel web template with optional automatic capture, SPA routes, linker domains and custom tracking origins.

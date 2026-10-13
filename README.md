@@ -7,7 +7,7 @@ pending; this download is not a claim that Google has reviewed or listed it.
 
 ## Install
 
-1. Download `template.tpl` from Torii's pixel Install page.
+1. Download [`template.tpl`](template.tpl), or use Torii's pixel Install page.
 2. In a **test** GTM web container, open Templates → New → menu → Import.
    Import the file, review permissions, and run its Tests tab before saving.
 3. Create a Torii Pixel tag. Paste the connection's Pixel ID from Torii.
