@@ -2,8 +2,7 @@
 
 This web-container template loads Torii's existing pixel. Page views run on
 load; optional automatic capture and cross-domain linking are off by default.
-The template is available for manual import. Community Gallery publication is
-pending; this download is not a claim that Google has reviewed or listed it.
+The template is available for manual import.
 
 ## Install
 
@@ -17,13 +16,25 @@ pending; this download is not a claim that Google has reviewed or listed it.
    `shop.example.com, *.myshopify.com`. Install the same pixel on destinations.
 6. Set the tag's firing option to **Once per page**. Choose the page trigger
    and configure Consent Settings/additional checks for your site's policy.
-   The template does not itself wait for consent. Test consent before publishing.
+   The consent-first option is off by default. To hold collection, enable it here and on the Torii pixel, then forward CMP choices with `Torii.consent(state)` or Consent Mode commands in `dataLayer`. All four permissions are required. Test both grant and withdrawal before publishing.
 7. Preview in Tag Assistant on a test site. Confirm one pixel loads, events arrive
    in Torii, and opted-in capture works. Then publish your GTM container.
 
 Use either this GTM tag or a direct script installation on each page. Different
 configurations for the same pixel on one page are unsupported. GTM's success
 callback means the script loaded; it does not prove Torii accepted events.
+
+## Consent-first collection
+
+Enable **Require consent before collection** in the tag and on the Torii pixel.
+The SDK then waits for all four Consent Mode grants before accessing browser
+storage or collecting events. Unknown/denied consent blocks collection, and
+early events are dropped. Forward every CMP preference change, including
+withdrawal, through `Torii.consent(state)` or Consent Mode `dataLayer` commands.
+GTM's internal consent state alone is not read by the SDK. A TCF bridge is
+available with an explicitly configured vendor and purpose mapping.
+
+See the [Torii consent integration guide](https://github.com/EdgeDigital/ToriiData/blob/main/docs/CONSENT_FIRST_COLLECTION.md).
 
 ## Optional custom tracking domain
 

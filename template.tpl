@@ -39,14 +39,14 @@ ___TEMPLATE_PARAMETERS___
         "type": "NON_EMPTY"
       }
     ],
-    "help": "Copy the pixel connection ID from Torii\u0027s Install page."
+    "help": "Copy the pixel connection ID from Torii's Install page."
   },
   {
     "type": "TEXT",
     "name": "trackingOrigin",
     "displayName": "Tracking origin (optional)",
     "simpleValueType": true,
-    "help": "Leave blank for https://app.toriidata.com. For a custom HTTPS origin, complete DNS/TLS setup and add https://your-tracking-host/torii.js* to this template\u0027s inject_script permission."
+    "help": "Leave blank for https://app.toriidata.com. For a custom HTTPS origin, complete DNS/TLS setup and add https://your-tracking-host/torii.js* to this template's inject_script permission."
   },
   {
     "type": "CHECKBOX",
@@ -55,6 +55,14 @@ ___TEMPLATE_PARAMETERS___
     "simpleValueType": true,
     "defaultValue": false,
     "help": "Requires a working custom tracking origin on the same site as the measured page."
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "consentFirst",
+    "checkboxText": "Require consent before collection",
+    "simpleValueType": true,
+    "defaultValue": false,
+    "help": "Enable the same setting on the Torii pixel and publish this tag. Forward CMP choices with Torii.consent(state) or Consent Mode commands in dataLayer. All four permissions must be granted; unknown consent is denied."
   },
   {
     "type": "CHECKBOX",
@@ -77,7 +85,7 @@ ___TEMPLATE_PARAMETERS___
     "checkboxText": "Track form submissions",
     "simpleValueType": true,
     "defaultValue": false,
-    "help": "Field values are excluded. Use data-torii-event\u003dlead on lead forms. Identity capture requires a separate data-torii-identify attribute."
+    "help": "Field values are excluded. Use data-torii-event=lead on lead forms. Identity capture requires a separate data-torii-identify attribute."
   },
   {
     "type": "CHECKBOX",
@@ -173,6 +181,7 @@ let url = parsed.origin + '/torii.js?id=' + encodeUriComponent(id) + '&installed
 if (features.length) url += '&autotrack=' + encodeUriComponent(features.join(','));
 if (domains.length) url += '&linker=' + encodeUriComponent(domains.join(','));
 if (data.serverCookies === true) url += '&server_cookies=1';
+if (data.consentFirst === true) url += '&consent_mode=required';
 if (!queryPermission('inject_script', url)) { data.gtmOnFailure(); return; }
 injectScript(url, data.gtmOnSuccess, data.gtmOnFailure, 'torii-pixel-' + id);
 
