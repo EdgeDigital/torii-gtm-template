@@ -118,6 +118,13 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "TEXT",
+    "name": "clarityProjectId",
+    "displayName": "Clarity project ID (optional)",
+    "simpleValueType": true,
+    "help": "Enable this project on the Torii pixel first. Install and consent Clarity separately; this tag never loads the recorder. Forward consent choices to Torii as well as Clarity. Leave blank to disable replay links."
+  },
+  {
+    "type": "TEXT",
     "name": "linkerDomains",
     "displayName": "Linker domains (optional)",
     "simpleValueType": true,
@@ -182,6 +189,15 @@ if (features.length) url += '&autotrack=' + encodeUriComponent(features.join(','
 if (domains.length) url += '&linker=' + encodeUriComponent(domains.join(','));
 if (data.serverCookies === true) url += '&server_cookies=1';
 if (data.consentFirst === true) url += '&consent_mode=required';
+const clarityProject = makeString(data.clarityProjectId || '').trim();
+if (clarityProject) {
+  let valid = clarityProject.length >= 4 && clarityProject.length <= 32;
+  for (let i = 0; i < clarityProject.length; i++) {
+    if ('abcdefghijklmnopqrstuvwxyz0123456789'.indexOf(clarityProject.charAt(i)) === -1) valid = false;
+  }
+  if (!valid) { data.gtmOnFailure(); return; }
+  url += '&clarity=' + encodeUriComponent(clarityProject);
+}
 if (!queryPermission('inject_script', url)) { data.gtmOnFailure(); return; }
 injectScript(url, data.gtmOnSuccess, data.gtmOnFailure, 'torii-pixel-' + id);
 

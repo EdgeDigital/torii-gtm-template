@@ -36,6 +36,20 @@ available with an explicitly configured vendor and purpose mapping.
 
 See the [Torii consent integration guide](https://github.com/EdgeDigital/ToriiData/blob/main/docs/CONSENT_FIRST_COLLECTION.md).
 
+## Optional Clarity recording links
+
+Enable replay linking and save the project ID on the Torii pixel, then set the
+same **Clarity project ID** in this tag. Install and consent Clarity separately.
+Torii never installs or starts the recorder, reads its cookies, or sends Torii
+identities to Microsoft. The template adds no recorder network permission.
+
+Forward consent choices to both tools. Recording links require all four Torii
+permissions and current, explicitly consented playback metadata from Clarity.
+The gate audit trail and held-event review open the associated recording in
+Clarity; project membership is required. Recordings and heatmaps stay there.
+
+See the [replay integration guide](https://github.com/EdgeDigital/ToriiData/blob/main/docs/SESSION_REPLAY.md).
+
 ## Optional custom tracking domain
 
 Leave Tracking origin blank to use `https://app.toriidata.com`. No client DNS
