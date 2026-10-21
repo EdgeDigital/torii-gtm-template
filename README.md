@@ -36,6 +36,23 @@ available with an explicitly configured vendor and purpose mapping.
 
 See the [Torii consent integration guide](https://github.com/EdgeDigital/ToriiData/blob/main/docs/CONSENT_FIRST_COLLECTION.md).
 
+## Optional form and iframe handoffs
+
+Set your owned linker domains, then independently enable **Decorate form
+submissions** and/or **Decorate embedded iframe URLs**. Both are off by default.
+GET handoffs use the submitted entry list; POST handoffs use the action URL and
+leave the request body unchanged. Submit-button overrides and native direct
+submit are supported without forcing cancelled or invalid submissions.
+
+Iframe decoration can reload an existing widget when consent/identity is ready.
+Use `data-torii-src` instead of `src` to defer its first load. Configure the same
+Torii pixel and independent consent on the destination. Add `data-torii-ignore`
+to exclude a form, button, frame or section. The receiver keeps valid handed-over
+IDs in page memory if browser storage is blocked; no consent is transferred.
+
+See the [form and iframe guide](https://github.com/EdgeDigital/ToriiData/blob/main/docs/CROSS_DOMAIN_LINKER.md)
+for custom AJAX, redirects and explicit `Torii.decorateFrame(frame)` integration.
+
 ## Optional Clarity recording links
 
 Enable replay linking and save the project ID on the Torii pixel, then set the

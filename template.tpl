@@ -117,6 +117,22 @@ ___TEMPLATE_PARAMETERS___
     "help": "For Shopify storefronts only. Checkout tracking still needs its separate installation."
   },
   {
+    "type": "CHECKBOX",
+    "name": "linkerForms",
+    "checkboxText": "Decorate form submissions",
+    "simpleValueType": true,
+    "defaultValue": false,
+    "help": "Requires linker domains. Carries identity and campaign handoff through GET fields and POST action URLs. This does not collect form values."
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "linkerIframes",
+    "checkboxText": "Decorate embedded iframe URLs",
+    "simpleValueType": true,
+    "defaultValue": false,
+    "help": "Requires linker domains. May reload an existing frame once when consent/identity is ready. Use data-torii-src instead of src to defer its first load. The destination needs the same pixel and its own consent setup."
+  },
+  {
     "type": "TEXT",
     "name": "clarityProjectId",
     "displayName": "Clarity project ID (optional)",
@@ -187,6 +203,9 @@ for (let i = 0; i < rawDomains.length; i++) {
 let url = parsed.origin + '/torii.js?id=' + encodeUriComponent(id) + '&installed_via=gtm';
 if (features.length) url += '&autotrack=' + encodeUriComponent(features.join(','));
 if (domains.length) url += '&linker=' + encodeUriComponent(domains.join(','));
+if ((data.linkerForms === true || data.linkerIframes === true) && !domains.length) { data.gtmOnFailure(); return; }
+if (data.linkerForms === true) url += '&linker_forms=1';
+if (data.linkerIframes === true) url += '&linker_iframes=1';
 if (data.serverCookies === true) url += '&server_cookies=1';
 if (data.consentFirst === true) url += '&consent_mode=required';
 const clarityProject = makeString(data.clarityProjectId || '').trim();
