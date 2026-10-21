@@ -1,6 +1,8 @@
 homepage: "https://toriidata.com"
 documentation: "https://github.com/EdgeDigital/torii-gtm-template#readme"
 versions:
+  - sha: aff9463347399c4a7177653edb349f63d7f4675c
+    changeNotes: Add optional Clarity project configuration for consented recording links in Torii SDK 1.11.0.
   - sha: 16736f105518b3cac762df3a524d6438ffddac69
     changeNotes: Add optional consent-first collection with CMP updates and explicit vendor/purpose TCF support in Torii SDK 1.10.0.
   - sha: fd1a65b456a32abfb69e3002413fbd3ec007e84f
