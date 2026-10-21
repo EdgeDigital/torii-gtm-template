@@ -1,6 +1,8 @@
 homepage: "https://toriidata.com"
 documentation: "https://github.com/EdgeDigital/torii-gtm-template#readme"
 versions:
+  - sha: e00e62127b56b2069b23e5cade84ac0a841de89e
+    changeNotes: Add separate opt-ins for consent-aware form and iframe handoffs in Torii SDK 1.12.0.
   - sha: aff9463347399c4a7177653edb349f63d7f4675c
     changeNotes: Add optional Clarity project configuration for consented recording links in Torii SDK 1.11.0.
   - sha: 16736f105518b3cac762df3a524d6438ffddac69
